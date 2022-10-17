@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    {% for tag in tags %}
+
+     <article class="post">
+        
+        <h2><a href="{% url 'app:tag_detail' slug=tag.slug %}">{{ tag.tag_name }}</a></h2>
+      
+    </article>
+    {% endfor %}
+
+      
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<h3>Profile Page</h3>
+<h1><strong>Welcome  </strong> {{name}}</h1>
+
+
+{% if messages %}
+     {% for message in messages %}
+      <small {% if message.tags %} class = "{{message.tags}}" {% endif %}> {{message}}</small>
+      {% endfor %}
+    {% endif %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-lg-6">
+
+    <h4>User Name : {{user.username}}</h4>
+    <h4>Name : {{user.name}}</h4>
+    <h4>Email : {{user.email}}</h4>
+    <h4>City : {{user.city}}</h4>
+    <h4>Mobile : {{user.mobile}}</h4>
+    
+    <h4>State : {{user.state}}</h4>
+    <h4>Country : {{user.country}}</h4>
+    <h4>Gender : {{user.gender}}</h4>
+
+    
+    <button type="button" class="btn btn-primary">
+      <a href="{% url 'app:profile_update' %}" class="text-white">Update</a>
+    </button>
+  </div> 
+
+    <div class="col-lg-6 my-3">
+      {% if user.profile_image %}
+      <img src="{{user.profile_image.url}}" width="60%" height="300">
+      {% endif %}
+    </div>  
+  </div>
+  </form>
+      
+{% endblock %}

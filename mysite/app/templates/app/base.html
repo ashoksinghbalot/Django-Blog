@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+    </head>
+    <body>
+        <header class="page-header">
+          <div class="container p-0 m-0" style="display: flex;">
+
+          
+              <h1><a href="/" class="p-3">Blog</a></h1>
+              <h1><a href="/polls/"class="p-3"> Polls </a></h1>
+              <h1><a href="/category/"class="p-3"> Category</a></h1>
+              <h1><a href="/tag/"class="p-3">Tag</a></h1>
+
+              {% if request.user.is_authenticated %}
+              
+              <h1><a href="/logout_view/"class="p-3">LogOut</a></h1>
+              <h1><a href="/profile/"class="p-3">Profile</a></h1>
+              <a href="{% url 'app:post_new' %}" class="top-menu p-3">
+                <i class="bi bi-journal-plus"></i> </a>
+              
+               {% else %}
+              <h1><a href="/signup_view/"class="p-3">Signup</a></h1>
+              <h1><a href="/login_view/"class="p-3">Login</a></h1>
+                {% endif %}
+              
+          </div>
+        </header>
+        <main class="container">
+            <div class="row">
+                <div class="col">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </main>
+
+      {% comment %} <footer class="bg-dark text-light" style="position:fixed;">
+        <p class="text-center py-3 my-0">
+            Copyright 2022 | All right reserved
+        </p>    
+
+      </footer>  {% endcomment %}
+
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/pooper.js" %}"></script>
+    <script>
+      $(document).ready(function(){
+        $('.reply-btn').click(function(){
+            $(this).parent().parent().next('.replied-comments').toggle()
+        })
+      });
+    </script>
+    </body>
+</html>
